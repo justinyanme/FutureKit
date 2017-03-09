@@ -118,9 +118,9 @@ open class _FutureAnyOperation : Operation, AnyFuture {
         self.futureAny = f
         self.cancelToken = f.getCancelToken()
         f.onComplete(executor) { (value) -> Void in
+            self.promise.complete(value)
             self._is_executing = false
             self._is_finished = true
-            self.promise.complete(value)
         }
         .ignoreFailures()
         
